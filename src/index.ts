@@ -1,7 +1,10 @@
-import  express, {Response, Request}  from "express";
+import express, { Response, Request } from "express";
 import cors from "cors";
 import "dotenv/config";
-import mongoose from "mongoose"
+import mongoose from "mongoose";
+
+import myUserRoute from "./routes/myUserRoute";
+
 const app = express();
 app.use(express.json());
 app.use(cors());
@@ -12,13 +15,8 @@ mongoose
 
   .catch((err) => console.log(err));
 
-
-
-app.get("/test", (req:Request, res:Response) => {
-    res.json({message:"Hello World!"})
-});
-
+app.use("/api/my/user", myUserRoute);
 
 app.listen(7000, () => {
-    console.log("Server started on 7000")
-})
+  console.log("Server started on 7000");
+});
