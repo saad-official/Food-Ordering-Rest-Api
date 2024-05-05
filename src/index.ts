@@ -4,6 +4,7 @@ import "dotenv/config";
 import mongoose from "mongoose";
 
 import myUserRoute from "./routes/myUserRoute";
+import { jwtCheck } from "./middleware/auth";
 
 const app = express();
 app.use(express.json());
@@ -15,7 +16,7 @@ mongoose
 
   .catch((err) => console.log(err));
 
-app.use("/api/my/user", myUserRoute);
+app.use("/api/my/user", jwtCheck, myUserRoute);
 
 app.listen(7000, () => {
   console.log("Server started on 7000");
